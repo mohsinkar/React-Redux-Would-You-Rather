@@ -5,8 +5,9 @@ The _DATA.js file represents a fake database and methods that let you access the
 
 ## Setup
 Execute the following commands
-⋅⋅* npm install
-..*  npm start
+
+* npm install
+*  npm start
 
 ## Data
 There are two types of objects stored in our database:
