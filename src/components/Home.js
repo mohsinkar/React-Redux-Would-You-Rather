@@ -3,13 +3,11 @@ import { Tab, Header, Icon } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PoolsList from './PollsList'
+import AnsweredPoolList from './AnsweredPollList'
 
 const HeaderHome = () => (
-    <Header as='h4' icon>
-        <Icon name='home' />
-        <Header.Subheader>
-            Answer and view polls
-      </Header.Subheader>
+    <Header as='h2'>
+        Answer and view polls
     </Header>
 )
 
@@ -22,7 +20,7 @@ const panes = [
     },
     {
         menuItem: 'Answered Questions',
-        render: () => <Tab.Pane attached={false}>Answered Questions Component</Tab.Pane>,
+        render: () => <Tab.Pane attached={false}><AnsweredPoolList /></Tab.Pane>,
     },
 ]
 

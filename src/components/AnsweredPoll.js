@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Button, Card, Image } from 'semantic-ui-react'
 
 
-const Polls = (props) => {
+const AnsweredPoll = (props) => {
     const [question] = useState(props.question);
     const [author] = useState(props.author);
 
@@ -35,4 +35,4 @@ const Polls = (props) => {
 }
 
 
-export default Polls
+export default AnsweredPoll
