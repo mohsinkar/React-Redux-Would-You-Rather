@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { setAuthedUser } from '../actions/authedUser'
+import { Redirect } from 'react-router-dom'
 
 
 const Login = () => {
@@ -11,12 +13,16 @@ const Login = () => {
     })
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`Submitting username ${username}`)
-        //dispatch(handleInitialData())
+        dispatch(setAuthedUser(username))
+    }
+    const authedUser = useSelector(state => state.authedUser)
+
+    if (authedUser !== null) {
+        return <Redirect to="/" />
     }
 
     return (
-        <div className="ui center aligned container" style={{ width: '50%' }}>
+        <div className="ui center aligned container" style={{ width: '80%', paddingTop: '30px' }}>
             <div className="column">
                 <h2 className="ui black image header">
                     <div className="content">
@@ -28,7 +34,7 @@ const Login = () => {
                         <div className="field">
                             <label>Select your username</label>
                             <select className="ui dropdown" value={username} onChange={e => setUsername(e.target.value)}>
-                                <option value="" disabled selected>Username</option>
+                                <option value="" disabled>Username</option>
                                 {
                                     users && Object.values(users).map(item =>
                                         <option key={item.id} value={item.id}>{item.name}</option>
