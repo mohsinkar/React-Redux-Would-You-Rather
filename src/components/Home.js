@@ -2,7 +2,7 @@ import React from 'react';
 import { Tab, Header, Icon } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
+import PoolsList from './PollsList'
 
 const HeaderHome = () => (
     <Header as='h4' icon>
@@ -18,7 +18,7 @@ const HeaderHome = () => (
 const panes = [
     {
         menuItem: 'Unanswered Questions ',
-        render: () => <Tab.Pane attached={false}>Unanswered Questions Component</Tab.Pane>,
+        render: () => <Tab.Pane attached={false}><PoolsList /></Tab.Pane>,
     },
     {
         menuItem: 'Answered Questions',

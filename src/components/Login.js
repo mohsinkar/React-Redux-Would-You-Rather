@@ -13,7 +13,11 @@ const Login = () => {
     })
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        dispatch(setAuthedUser(username))
+
+        dispatch(setAuthedUser(Object.values(users).filter((e) => {
+            return e.id === username
+        })[0]
+        ))
     }
     const authedUser = useSelector(state => state.authedUser)
 

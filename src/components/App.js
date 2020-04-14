@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
-import Loader from '../components/loader'
 import Nav from '../components/Nav'
 import Login from '../components/Login'
 import Home from './Home';
@@ -20,7 +19,7 @@ const App = () => {
   return (
     <Router>
 
-      <div className="ui center aligned container" style={{ width: '50%' }}>
+      <div className="ui center aligned container" style={{ width: '50%', paddingTop: '20px' }}>
         <Nav />
         <Route path="/" exact component={Home} />
         <Route path="/login" component={Login} />
