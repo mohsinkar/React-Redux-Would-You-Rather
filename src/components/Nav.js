@@ -25,7 +25,7 @@ const Nav = () => {
             return (
                 <div className="right menu">
                     <div className="item">
-                        <img className="ui avatar image" src={authedUser.avatarURL} />
+                        <img className="ui avatar image" src={authedUser.avatarURL}  alt={authedUser.name} />
                         <span>{authedUser.name}</span>
                     </div>
 

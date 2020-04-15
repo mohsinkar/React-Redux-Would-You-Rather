@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux'
 import { Button, Card, Image } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import AnswerPoll from './AnswerPoll'
+
+
 
 
 const Polls = (props) => {
     const [question] = useState(props.question);
     const [author] = useState(props.author);
+    const [answered] = useState(props.answered);
+
 
     return (
-        <div className="ui one column stackable center aligned page grid" style={{paddingTop: '15px'}}>
+        <div className="ui one column stackable center aligned page grid" style={{ paddingTop: '15px' }}>
             <Card>
                 <Card.Content>
                     <Image
@@ -16,17 +21,27 @@ const Polls = (props) => {
                         size='mini'
                         src={author.avatarURL}
                     />
-                    <Card.Header>{author.name} Poll</Card.Header>
-                    <Card.Meta>Would you rather ?</Card.Meta>
+                    <Card.Header>{author.name} Asks</Card.Header>
+                    <Card.Meta><strong>Would you rather ?</strong></Card.Meta>
                     <Card.Description>
-                        Steve wants to add you to the group <strong>best friends</strong>
+                        <div className='wouldyou'>
+                            {question.optionOne.text}
+                        </div>
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                    <div className='ui two buttons'>
-                        <Button basic color='green'>
-                            Answer Poll
+                    <div>
+                        {
+                            answered ? <Link className='sign-in-button' to={`/question/${question.id}`} ><Button className='fluid ui button' basic color='green'>
+                                View Poll
+                    </Button>
+                            </Link> : <Link className='sign-in-button' to={`/result/${question.id}`} >
+                                    <Button className='fluid ui button' basic color='green'>
+                                        View Poll
                         </Button>
+                                </Link>
+                        }
+
                     </div>
                 </Card.Content>
             </Card>

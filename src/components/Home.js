@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab, Header, Icon } from 'semantic-ui-react'
+import { Tab, Header } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import PoolsList from './PollsList'
