@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Image, Progress } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { Card, Image, Progress } from 'semantic-ui-react'
+import {useSelector } from 'react-redux'
 import helper from '../utils/helper'
 import { Redirect } from "react-router-dom";
-import { handleAnswerQuestion } from '../actions/shared'
 
 const PollResult = (props) => {
 

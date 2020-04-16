@@ -11,7 +11,7 @@ const AnsweredPollList = () => {
     return (
         <div>
             {
-                Object.values(questions).filter((question) => (question.id in setAuthedUserAnswers.answers)).map(question => (
+                Object.values(questions).filter((question) => (question.id in setAuthedUserAnswers.answers)).sort((a, b) => b.timestamp - a.timestamp).map(question => (
                     <Polls question={question} author={Object.values(users).find(user => question.author === user.id)} key={question.id} answered={false}></Polls>
                 ))
             }

@@ -2,7 +2,7 @@ import { getInitialData } from '../utils/api'
 import API from '../utils/api'
 import { receiveUSERS, userAnswer } from '../actions/users'
 import { receiveQuestions, answerQuestion } from '../actions/questions'
-import { setAuthedUser } from '../actions/authedUser'
+//import { setAuthedUser } from '../actions/authedUser'
 
 
 export function handleInitialData() {

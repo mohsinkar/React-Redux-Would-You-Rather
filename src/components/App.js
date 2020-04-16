@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Nav from '../components/Nav'
@@ -14,6 +14,7 @@ import Leaderboard from './Leaderboard';
 const App = () => {
 
   const dispatch = useDispatch()
+  
 
   useEffect(() => {
     dispatch(handleInitialData())
@@ -22,15 +23,17 @@ const App = () => {
 
   return (
     <Router>
-
       <div className="ui center aligned container" style={{ width: '50%', paddingTop: '20px' }}>
         <Nav />
-        <Route path="/" exact component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/question/:id" component={AnswerPoll} />
-        <Route path="/result/:id" component={PollResult} />
-        <Route path="/newquestion" component={NewQuestion} />
-        <Route path="/leaderboard" component={Leaderboard} />
+              <div>
+            <Route path="/" exact component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/question/:id" component={AnswerPoll} />
+            <Route path="/result/:id" component={PollResult} />
+            <Route path="/newquestion" component={NewQuestion} />
+            <Route path="/leaderboard" component={Leaderboard} />
+          </div>
+
       </div>
     </Router>
 
