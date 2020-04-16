@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import helper from '../utils/helper'
-import { Redirect } from "react-router-dom";
 import { Card, Image } from 'semantic-ui-react'
 import Login from '../components/Login'
 
