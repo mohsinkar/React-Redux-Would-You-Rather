@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 import { Header } from 'semantic-ui-react'
-
+import { Link } from 'react-router-dom'
 
 const HeaderNav = () => (
     <Header as='h2'>
@@ -14,6 +14,9 @@ const HeaderNav = () => (
 const Nav = () => {
 
     const authedUser = useSelector(state => state.authedUser)
+    const users = useSelector(state => state.users)
+    
+    const authUser = Object.values(users).find(user => user.id === authedUser)
     const dispatch = useDispatch()
 
     const handleLogout = () => {
@@ -25,8 +28,8 @@ const Nav = () => {
             return (
                 <div className="right menu">
                     <div className="item">
-                        <img className="ui avatar image" src={authedUser.avatarURL}  alt={authedUser.name} />
-                        <span>{authedUser.name}</span>
+                        <img className="ui avatar image" src={authUser.avatarURL}  alt={authUser.name} />
+                        <span>{authUser.name}</span>
                     </div>
 
                     <div className="item"> <a href="/login" className="ui item" onClick={e => handleLogout()}>Logout</a></div>
@@ -35,7 +38,6 @@ const Nav = () => {
         else
             return (<div className="right menu">
                 <div className="item">
-                    <i className="user icon"></i>
                 </div>
                 <div className="item"> <a href="/login" className="ui item">Login</a> </div>
             </div>
@@ -46,9 +48,9 @@ const Nav = () => {
         <div>
             <HeaderNav />
             <div className="ui secondary  menu">
-                <a className="item active">Home</a>
-                <a className="item">New Question</a>
-                <a className="item">Leaderboard</a>
+                <Link className='item' to='/' >Home</Link>
+                <Link className='item' to='/newquestion' >New Question</Link>
+                <Link className='item' to='/leaderboard' >Leaderboard</Link>
                 {isLogged(authedUser)}
 
             </div>

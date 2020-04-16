@@ -16,7 +16,7 @@ const Login = () => {
 
         dispatch(setAuthedUser(Object.values(users).filter((e) => {
             return e.id === username
-        })[0]
+        })[0].id
         ))
     }
     const authedUser = useSelector(state => state.authedUser)

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import AnswerPoll from './AnswerPoll'
-
-
 
 
 const Polls = (props) => {
@@ -14,7 +11,7 @@ const Polls = (props) => {
 
     return (
         <div className="ui one column stackable center aligned page grid" style={{ paddingTop: '15px' }}>
-            <Card>
+            <Card className="ui fluid black raised">
                 <Card.Content>
                     <Image
                         floated='right'

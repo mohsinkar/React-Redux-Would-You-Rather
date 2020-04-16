@@ -5,8 +5,10 @@ import Nav from '../components/Nav'
 import Login from '../components/Login'
 import AnswerPoll from '../components/AnswerPoll'
 import PollResult from '../components/PollResult'
+import NewQuestion from '../components/NewQuestion'
 import Home from './Home';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Leaderboard from './Leaderboard';
 
 
 const App = () => {
@@ -27,6 +29,8 @@ const App = () => {
         <Route path="/login" component={Login} />
         <Route path="/question/:id" component={AnswerPoll} />
         <Route path="/result/:id" component={PollResult} />
+        <Route path="/newquestion" component={NewQuestion} />
+        <Route path="/leaderboard" component={Leaderboard} />
       </div>
     </Router>
 
