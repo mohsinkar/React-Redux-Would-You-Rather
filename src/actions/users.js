@@ -1,6 +1,6 @@
 export const RECEIVE_USERS = 'RECEIVE_USERS'
 export const QUESTION_ANSWERED = 'QUESTION_ANSWERED'
-export const NEW_QUESTION = 'NEW_QUESTION'
+export const NEW_QUESTION = 'NEW_QUESTION_USER'
 
 export function receiveUSERS(users) {
     return {
@@ -20,7 +20,7 @@ export function userAnswer({ qid, answer, authedUser }) {
     }
 }
 
-export function newQuestionUser({ question }) {
+export function newQuestionUser(question) {
     return {
         type: NEW_QUESTION,
         payload: {

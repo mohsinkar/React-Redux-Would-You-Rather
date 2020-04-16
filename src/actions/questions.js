@@ -23,7 +23,7 @@ export function answerQuestion({ qid, answer, authedUser }) {
 }
 
 // ADD new question
-export function newQuestion({ question }) {
+export function newQuestion(question) {
   return {
     type: NEW_QUESTION,
     payload: {

@@ -2,24 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Card, Image, Progress } from 'semantic-ui-react'
 import {useSelector } from 'react-redux'
 import helper from '../utils/helper'
-import { Redirect } from "react-router-dom";
+import Login from '../components/Login'
+import Loader from './loader'
 
 const PollResult = (props) => {
 
     const [id] = useState(props.match.params.id);
-    const [question, setQuestion] = useState({
-        id: '',
-        author: '',
-        timestamp: '',
-        optionOne: {
-            votes: [],
-            text: ''
-        },
-        optionTwo: {
-            votes: [],
-            text: ''
-        }
-    });
+    const [question, setQuestion] = useState({});
     const [author, setAuthor] = useState({});
     const [answer, setAnswer] = useState('');
     const [totalVotes, setTotalVotes] = useState(0);
@@ -42,7 +31,7 @@ const PollResult = (props) => {
         if (helper.isUserLogged(authedUser))
             setAnswer(Object.values(users).find(user => user.id === authedUser).answers[id])
 
-    })
+    },[questions, authedUser, users, id])
 
     const getAnswerFormat = (ans) => {
         return answer === ans ? 'green' : 'red'
@@ -53,7 +42,8 @@ const PollResult = (props) => {
     }
 
     return (
-        !helper.isUserLogged(authedUser) ? <Redirect to='/login' /> :
+        !helper.isUserLogged(authedUser) ? <Login /> :
+        Object.keys(question).length === 0 ? <Loader /> :
             <div className="ui one column stackable center aligned page grid" style={{ paddingTop: '50px' }}>
                 <Card className="ui fluid black raised">
                     <Card.Content>
@@ -70,14 +60,14 @@ const PollResult = (props) => {
                                     <Progress percent={(optionOneVotes / totalVotes) * 100} color='teal'>
                                         {optionOneVotes} of {totalVotes}
                                     </Progress>
-                                    <div class="label">{question.optionOne.text} {userAnswer('optionOne')} </div>
+                                    <div className="label">{question.optionOne.text} {userAnswer('optionOne')} </div>
 
                                 </div>
                                 <div className={`ui segment ${getAnswerFormat('optionTwo')}`}>
                                     <Progress percent={(optionTwoVotes / totalVotes) * 100} color='teal'>
                                         {optionTwoVotes} of {totalVotes}
                                     </Progress>
-                                    <div class="label">{question.optionTwo.text} {userAnswer('optionTwo')} </div></div>
+                                    <div className="label">{question.optionTwo.text} {userAnswer('optionTwo')} </div></div>
                             </div>
                         </Card.Description>
                     </Card.Content>

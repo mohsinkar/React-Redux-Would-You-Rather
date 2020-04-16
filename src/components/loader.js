@@ -2,10 +2,15 @@ import React from 'react';
 
 const loader = () => {
     return (<div>
-        <div className="ui active inverted dimmer">
-            <div className="ui large text loader">Loading Application Data..</div>
+        <div class="ui icon message">
+        <i class="notched circle loading icon"></i>
+        <div class="content">
+          <div class="header">
+            Just one second
+          </div>
+          <p>We're fetching that content for you.</p>
         </div>
-        <p></p>
+      </div>
     </div>
     )
 }

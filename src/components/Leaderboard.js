@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import helper from '../utils/helper'
 import { Redirect } from "react-router-dom";
 import { Card, Image } from 'semantic-ui-react'
-
+import Login from '../components/Login'
 
 const Leaderboard = () => {
 
@@ -19,7 +19,7 @@ const Leaderboard = () => {
     }
 
     return (
-        !helper.isUserLogged(authedUser) ? <Redirect to='/login' /> :
+        !helper.isUserLogged(authedUser) ? <Login /> :
 
             <div className="ui one column stackable center aligned page grid" style={{ paddingTop: '15px' }}>
                 {Object.values(getSortedUsers()).map(user => (
