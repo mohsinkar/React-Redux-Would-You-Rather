@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import {handleAnswerQuestion} from '../actions/shared'
 import Loader from './loader'
 import Login from '../components/Login'
+import Message404 from './Message404'
 
 
 const AnswerPoll = (props) => {
@@ -14,6 +15,7 @@ const AnswerPoll = (props) => {
     const [author, setAuthor] = useState({});
     const [answer, setAnswer] = useState('optionOne');
     const [answered, setAnswered] = useState(false)
+    const [message, setMessage] = useState(false)
 
     const authedUser = useSelector(state => state.authedUser)
     const questions = useSelector(state => state.questions)
@@ -23,22 +25,40 @@ const AnswerPoll = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        Object.values(questions).filter((question) => question.id === id).map(question => {
+       const ques = Object.values(questions).filter((question) => question.id === id).map(question => {
             setQuestion(question)
             setAuthor(Object.values(users).find(user => question.author === user.id))
-        })
-    })
+        },[message])
+
+        if(ques.length < 1) { 
+            setMessage(true) 
+        }
+        else {   
+            setMessage(false) 
+           }
+
+    }, [message])
 
     const handleAnswerSubmit = (evt) => {
         evt.preventDefault();
         dispatch(handleAnswerQuestion({qid:id,answer,authedUser}))
         setAnswered(true)
     }
+    
+    const getLoader = () => {
+        if(message) {
+                return  <Message404 />
+        }else {
+            return (
+                <Loader />
+            )
+        }
+    }
 
     return (
         answered ?<Redirect to={`/result/${id}`} /> :
         !helper.isUserLogged(authedUser) ?  <Login /> :
-        Object.keys(question).length === 0 ? <Loader /> :
+        Object.keys(question).length === 0 ? getLoader() :
         <div className="ui one column stackable center aligned page grid" style={{ paddingTop: '50px' }}>
             <Card className="ui fluid black raised">
                 <Card.Content>

@@ -22,7 +22,7 @@ const Leaderboard = () => {
 
             <div className="ui one column stackable center aligned page grid" style={{ paddingTop: '15px' }}>
                 {Object.values(getSortedUsers()).map(user => (
-                    <Card className="ui fluid black raised">
+                    <Card className="ui fluid black raised" key={user.user.id}>
                         <Card.Content>
                             <Image
                                 floated='right'
@@ -41,23 +41,23 @@ const Leaderboard = () => {
                             </Card.Description>
                         </Card.Content>
                         <Card.Content extra>
-                            <div class="ui placeholder segment">
-                                <div class="ui two column center aligned grid">
-                                    <div class="ui vertical divider">&</div>
-                                    <div class="middle aligned row">
-                                        <div class="column">
-                                            <div class="ui header">
+                            <div className="ui placeholder segment">
+                                <div className="ui two column center aligned grid">
+                                    <div className="ui vertical divider">&</div>
+                                    <div className="middle aligned row">
+                                        <div className="column">
+                                            <div className="ui header">
                                                 Answered questions
                                       </div>
-                                            <div class="ui header">
+                                            <div className="ui header">
                                                 {Object.keys(user.user.answers).length}
                                             </div>
                                         </div>
-                                        <div class="column">
-                                            <div class="ui header">
+                                        <div className="column">
+                                            <div className="ui header">
                                                 Created questions
                                       </div>
-                                            <div class="ui header">
+                                            <div className="ui header">
                                                 {Object.keys(user.user.questions).length}
                                             </div>
                                         </div>

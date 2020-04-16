@@ -2,10 +2,10 @@ import React from 'react';
 
 const loader = () => {
     return (<div>
-        <div class="ui icon message">
-        <i class="notched circle loading icon"></i>
-        <div class="content">
-          <div class="header">
+        <div className="ui icon message">
+        <i className="notched circle loading icon"></i>
+        <div className="content">
+          <div className="header">
             Just one second
           </div>
           <p>We're fetching that content for you.</p>

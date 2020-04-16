@@ -4,11 +4,13 @@ import {useSelector } from 'react-redux'
 import helper from '../utils/helper'
 import Login from '../components/Login'
 import Loader from './loader'
+import Message404 from './Message404'
 
 const PollResult = (props) => {
 
     const [id] = useState(props.match.params.id);
     const [question, setQuestion] = useState({});
+    const [message, setMessage] = useState(false)
     const [author, setAuthor] = useState({});
     const [answer, setAnswer] = useState('');
     const [totalVotes, setTotalVotes] = useState(0);
@@ -21,20 +23,35 @@ const PollResult = (props) => {
 
 
     useEffect(() => {
-        Object.values(questions).filter((question) => (question.id === id)).map(question => {
+        const ques = Object.values(questions).filter((question) => (question.id === id)).map(question => {
             setQuestion(question)
             setAuthor(Object.values(users).find(user => question.author === user.id))
             setTotalVotes(question.optionOne.votes.length + question.optionTwo.votes.length)
             setOneVotes(question.optionOne.votes.length)
             setTwoVotes(question.optionTwo.votes.length)
         })
+        
+        if(ques.length < 1) setMessage(true)
+        else {
+            setMessage(false)
+        } 
         if (helper.isUserLogged(authedUser))
             setAnswer(Object.values(users).find(user => user.id === authedUser).answers[id])
 
-    },[questions, authedUser, users, id])
+    },[questions, authedUser, users, id, message])
 
     const getAnswerFormat = (ans) => {
         return answer === ans ? 'green' : 'red'
+    }
+
+    const getLoader = () => {
+        if(message) {
+                return  <Message404 />
+        }else {
+            return (
+                <Loader />
+            )
+        }
     }
 
     const userAnswer = (ans) => {
@@ -43,7 +60,7 @@ const PollResult = (props) => {
 
     return (
         !helper.isUserLogged(authedUser) ? <Login /> :
-        Object.keys(question).length === 0 ? <Loader /> :
+        Object.keys(question).length === 0  ? getLoader() :
             <div className="ui one column stackable center aligned page grid" style={{ paddingTop: '50px' }}>
                 <Card className="ui fluid black raised">
                     <Card.Content>
@@ -57,14 +74,14 @@ const PollResult = (props) => {
                         <Card.Description style={{ paddingTop: '30px' }}>
                             <div>
                                 <div className={`ui segment ${getAnswerFormat('optionOne')}`}>
-                                    <Progress percent={(optionOneVotes / totalVotes) * 100} color='teal'>
+                                    <Progress percent={(optionOneVotes / totalVotes) * 100} color='teal' progress>
                                         {optionOneVotes} of {totalVotes}
                                     </Progress>
                                     <div className="label">{question.optionOne.text} {userAnswer('optionOne')} </div>
 
                                 </div>
                                 <div className={`ui segment ${getAnswerFormat('optionTwo')}`}>
-                                    <Progress percent={(optionTwoVotes / totalVotes) * 100} color='teal'>
+                                    <Progress percent={(optionTwoVotes / totalVotes) * 100} color='teal' progress>
                                         {optionTwoVotes} of {totalVotes}
                                     </Progress>
                                     <div className="label">{question.optionTwo.text} {userAnswer('optionTwo')} </div></div>
